@@ -45,3 +45,7 @@ svmPredict <- predict(svmModel, test2)
 predictprob <- predict(svmModel, test2, type='prob')[2]
 ConfMatrixPredict <- confusionMatrix(svmPredict, na.omit(test2)$num)
 ConfMatrixPredict$table
+AUC<- roc(na.omit(test2)$num,as.numeric(as.matrix((predictprob))))$auc
+Accuracy<- ConfMatrixPredict$overall['Accuracy'] 
+svmPerformance<-cbind(AUC,Accuracy)
+svmPerformance
